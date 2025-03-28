@@ -1,8 +1,9 @@
 const express = require("express")
 const routes=express.Router()
 const user = require('../models/userModel')
-
+const cors = require("cors");
 //CRUD OPERATIONS
+routes.use(cors()); // Enable CORS
 routes
   .get('/users',async (req,res)=>{
     try{
@@ -26,7 +27,8 @@ routes
     try{
     
   const {name}=req.body;
-  const newUser=new user({name});
+  const {password}=req.body;
+  const newUser=new user({name,password});
   console.log(`${newUser}`)
   await newUser.save();
         // res.send('got get req1')
@@ -53,8 +55,9 @@ routes
 .put('/users/:id',async (req,res)=>{
   try{
   const {id} =req.params;
-const {name} =req.body
-const updatedUser=await user.findByIdAndUpdate(id,{name});
+const {name} =req.body;
+const {password} =req.body
+const updatedUser=await user.findByIdAndUpdate(id,{name,password});
 if(!updatedUser)
 {
 res.json({message:"user not provided"});
@@ -82,7 +85,6 @@ routes
 .delete('/users/:id',async (req,res)=>{
   try{
   const {id} =req.params;
-//const {name} =req.body
 const deleteUser=await user.findByIdAndDelete(id);
 if(!deleteUser)
 {

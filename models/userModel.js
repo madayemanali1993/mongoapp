@@ -9,6 +9,11 @@ const {
       required: true,
       maxlength: 50
     },
+    password: {
+      type: String,
+      required: true,
+      maxlength: 20
+    },
     createdAt: {
       type: Date,
       default: Date.now,

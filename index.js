@@ -1,17 +1,19 @@
 
 const connectDB = require('./db');
-
-const express = require('express')
-const app = express()
-
+//const cors = require("cors");
+const express = require('express');
+const app = express();
 const dotenv=require('dotenv'); 
  //load env file
  dotenv.config(); //env loaded
+ //app.use(cors()); // Enable CORS
 const port = process.env.port;
+
 const users= require('./routes/users')
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
+
+ app.get('/', (req, res) => {
+   res.send('Hello World!')
+ })
 
 //body parser
 app.use(express.json());
