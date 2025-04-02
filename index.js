@@ -7,7 +7,7 @@ const dotenv=require('dotenv');
  //load env file
  dotenv.config(); //env loaded
  //app.use(cors()); // Enable CORS
-const port = process.env.port;
+const port = process.env.port || 5001;
 
 const users= require('./routes/users')
 
