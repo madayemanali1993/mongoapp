@@ -5,7 +5,7 @@ const cors = require("cors");
 //CRUD OPERATIONS
 routes.use(cors()); // Enable CORS
 routes
-  .get('/users',async (req,res)=>{
+  .get('/allusers',async (req,res)=>{
     try{
   const users= await user.find();
   res.status(200).json(users);
@@ -20,8 +20,38 @@ routes
           error: error.message
         })
     }
-    //post
+   
   })
+routes.get('/users', async (req, res) => {
+  try {
+      const { name, password } = req.query;
+
+      if (!name || !password) {
+          return res.status(400).json({
+              success: false,
+              message: "Name and password are required",
+          });
+      }
+
+      const users = await user.findOne({ name, password });
+
+      if (!users) {
+          return res.status(404).json({
+              success: false,
+              message: "User not found",
+          });
+      }
+
+      res.status(200).json(users);
+  } catch (error) {
+      res.status(500).json({
+          success: false,
+          message: "Internal server error",
+          error: error.message,
+      });
+  }
+});
+   //post
   routes
   .post('/users',async (req,res)=>{
     try{
