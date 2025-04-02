@@ -28,7 +28,9 @@ routes
     
   const {name}=req.body;
   const {password}=req.body;
-  const newUser=new user({name,password});
+  const {email}=req.body;
+  const {phone}=req.body;
+  const newUser=new user({name,password,email,phone});
   console.log(`${newUser}`)
   await newUser.save();
         // res.send('got get req1')

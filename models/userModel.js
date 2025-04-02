@@ -14,6 +14,16 @@ const {
       required: true,
       maxlength: 20
     },
+    email: {
+      type: String,
+      required: true,
+      maxlength: 50
+    },
+    phone: {
+      type: String,
+      required: true,
+      maxlength: 50
+    },
     createdAt: {
       type: Date,
       default: Date.now,
